@@ -7,6 +7,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score
 import warnings
+import requests
+from io import BytesIO
 warnings.filterwarnings("ignore")
 
 # data prepraation function
@@ -93,9 +95,11 @@ def main():
 
     # load data
     #data_path = r"C:\algonquin\2025W\2216_ML\2216_project\2216_project_UCLA_Neural_Networks\data\Admission.xlsx" 
-    data_path = "https://github.com/chen041081733/2216_project_UCLA_Neural_Networks/blob/main/data/Admission.xlsx"
+    data_url = "https://raw.githubusercontent.com/chen041081733/2216_project_UCLA_Neural_Networks/main/data/Admission.xlsx"
     try:
-        data = pd.read_excel(data_path)
+        response = requests.get(data_url)
+        response.raise_for_status()  # make sure request successful
+        data = pd.read_excel(BytesIO(response.content))
         xtrain_scaled, xtest_scaled, ytrain, ytest, scaler, feature_columns = data_preparation(data)
         model, train_accuracy, test_accuracy, conf_matrix, loss_values = UCLA_Neural(
             xtrain_scaled, ytrain, xtest_scaled, ytest
@@ -112,7 +116,7 @@ def main():
     st.write("Confusion Matrix:")
     st.write(conf_matrix)
 
-    # 绘制损失曲线
+    #plot loss curve
     st.subheader("Loss Curve")
     fig, ax = plt.subplots(figsize=(10, 6))
     ax.plot(loss_values, label='Loss', color='blue')
