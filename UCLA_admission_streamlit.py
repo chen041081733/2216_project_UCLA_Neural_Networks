@@ -93,7 +93,7 @@ def main():
 
     # load data
     #data_path = r"C:\algonquin\2025W\2216_ML\2216_project\2216_project_UCLA_Neural_Networks\data\Admission.xlsx" 
-    data_path = https://github.com/chen041081733/2216_project_UCLA_Neural_Networks/blob/main/data/Admission.xlsx
+    data_path = "https://github.com/chen041081733/2216_project_UCLA_Neural_Networks/blob/main/data/Admission.xlsx"
     try:
         data = pd.read_excel(data_path)
         xtrain_scaled, xtest_scaled, ytrain, ytest, scaler, feature_columns = data_preparation(data)
