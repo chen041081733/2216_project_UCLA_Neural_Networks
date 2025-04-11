@@ -69,3 +69,7 @@ Admission Prediction:
 •	Displays probability of admission for better decision-making.
 
 Thank you for using the UCLA Admission Prediction System!
+
+Streamlit link:
+https://2216projectuclaneuralnetworks-zqkexqzyw2csoyfege6v9x.streamlit.app/
+
